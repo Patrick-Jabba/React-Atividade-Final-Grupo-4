@@ -69,6 +69,7 @@ const MateriasListagem = () => {
                             <TableRow>
                                 <StyledTableCell>Título</StyledTableCell>
                                 <StyledTableCell>Professor</StyledTableCell>
+                                <StyledTableCell></StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
