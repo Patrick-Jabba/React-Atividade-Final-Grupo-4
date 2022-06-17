@@ -1,4 +1,4 @@
-import Footer from "../../components/Footer"
+import Footer from "../../components/Footer";
 import Header from "../../components/Header"
 
 const Amazonas = () => {
@@ -7,7 +7,7 @@ const Amazonas = () => {
             <Header />
             <Footer />
         </>
-    )
-};
+    );
+}
 
 export default Amazonas;
