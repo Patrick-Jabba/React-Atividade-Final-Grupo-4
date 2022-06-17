@@ -13,12 +13,12 @@ import { StyledTableCell, StyledTableRow } from "./styles";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { useNavigate } from "react-router-dom";
 import Lottie from "react-lottie";
 import animationData from "../../lotties/78259-loading.json";
 
 const MateriasListagem = () => {
     const [materias, setMaterias] = useState([]);
+    const MySwal = withReactContent(Swal);
 
     const defaultOptions = {
         loop: true,
@@ -39,6 +39,27 @@ const MateriasListagem = () => {
         });
     };
 
+    const deleteMateria = (materia) =>{
+        axios.delete(API_URL_MATERIA, { data: materia })
+        .then((response) => {
+          MySwal.fire(<p>{response?.data?.message}</p>);
+  
+          const materiaIndex = materias.findIndex(
+            (elemento) => elemento.id === materia.id
+          );
+          let newMaterias = [...materias];
+          newMaterias.splice(materiaIndex, 1);
+          setMaterias(newMaterias);
+        })
+        .catch((error) => {
+          MySwal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: error,
+          });
+        })
+    }
+
     return (
         <Box sx={{ marginTop: "25px" }}>
             {materias.length > 0 ? (
@@ -52,13 +73,13 @@ const MateriasListagem = () => {
                         </TableHead>
                         <TableBody>
                             {materias.map((materia) => (
-                                <StyledTableRow>
+                                <StyledTableRow key={materia.id}>
                                     <StyledTableCell>{materia.titulo}</StyledTableCell>
                                     <StyledTableCell>{materia.professor_nome}</StyledTableCell>
                                     <StyledTableCell>
-                                        {/* <Button onClick={() => deletarMateria(materia)} variant="text">
+                                        <Button onClick={() => deleteMateria(materia)} variant="text">
                                             <DeleteIcon />
-                                        </Button> */}
+                                        </Button>
                                     </StyledTableCell>
                                 </StyledTableRow>
                             ))}
