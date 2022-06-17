@@ -1,14 +1,14 @@
-import { Footer } from "./components/footer";
-import { Navbar } from "./components/navbar";
-import "./index.css";
+import { Routes, Route } from "react-router-dom";
+import Amazonas from "./pages/Amazonas";
 
 function App() {
- return (
+  return (
     <>
-      <Navbar />
-      <Footer />
+      <Routes>
+        <Route path="/" element={<Amazonas />} />
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
