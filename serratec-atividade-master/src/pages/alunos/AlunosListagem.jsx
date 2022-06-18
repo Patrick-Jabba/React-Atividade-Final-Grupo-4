@@ -7,7 +7,7 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { StyledTableCell, StyledTableRow } from "./styles";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { API_URL } from "../../constants";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -17,11 +17,15 @@ import withReactContent from "sweetalert2-react-content";
 import { useNavigate } from "react-router-dom";
 import Lottie from "react-lottie";
 import animationData from "../../lotties/78259-loading.json";
+import { AlunoContext } from "../../context";
 
 const AlunosListagem = () => {
+  const { alunos, setAlunos } =
+    useContext(AlunoContext);
+
   const navigate = useNavigate();
   const MySwal = withReactContent(Swal);
-  const [alunos, setAlunos] = useState([]);
+  
 
   const defaultOptions = {
     loop: true,
@@ -67,7 +71,7 @@ const AlunosListagem = () => {
   const editarAluno = (aluno) => {
     navigate(`/editar-alunos/${aluno.id}`);
   };
-
+  
   // SE FOSSE USAR A ABSTRAÇÃO (aula 4)
   // const listaCampos = [
   //   "nome",
